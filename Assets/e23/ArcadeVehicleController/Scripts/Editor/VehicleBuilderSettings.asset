@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b49e7af8ee6ff4cbba65c9ae5d2a539a, type: 3}
+  m_Name: VehicleBuilderSettings
+  m_EditorClassIdentifier: 
+  vehicleName: newVehicle
+  vehicleModel: {fileID: 0}
+  vehicleType: 0
+  physicsMaterial: {fileID: 13400000, guid: b63b0dc9f78ff446b863b75d531b3ffa, type: 2}
+  bodyName: body
+  frontLeftWheelName: frontWheelLeft
+  frontRightWheelName: fronWheelRight
+  backLeftWheelName: backWheelLeft
+  backRightWheelName: backWheelRight
+  vehicleSettings: {fileID: 11400000, guid: 710b758bfe30ec742b570e34afc78c6a, type: 2}
+  addEffectsComponent: 0
+  smokeParticleSystemPrefab: {fileID: 0}
+  smokeCount: 1
+  trailRendererPrefab: {fileID: 0}
+  trailCount: 0
+  addExampleInput: 0
+  monoBehaviours: []

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11b0d68efdcb67b49b5e649862afff07, type: 3}
+  m_Name: VehicleBehaviourSettings_Car
+  m_EditorClassIdentifier: 
+  acceleration: 12
+  maxSpeed: 30
+  breakSpeed: 1.7
+  boostSpeed: 60
+  maxSpeedToStartReverse: 150
+  steering: 80
+  maxStrafingSpeed: 15
+  gravity: 20
+  drift: 0.85
+  vehicleBodyTilt: 0
+  forwardTilt: 4
+  angularDrag: -1
+  turnInAir: 1
+  turnWhenStationary: 1
+  twoWheelTilt: 0
+  stopSlopeSlide: 1
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 512

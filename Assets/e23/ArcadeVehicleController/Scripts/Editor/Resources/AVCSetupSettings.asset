@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d8dc595eb721f9468bca76d7e951dfd, type: 3}
+  m_Name: AVCSetupSettings
+  m_EditorClassIdentifier: 
+  windowTitle: Arcade Vehicle Controller Setup
+  Skin: {fileID: 11400000, guid: f5af9dfb968710c4f991d75ebe1a3835, type: 2}
+  setupMessage_1: AVC uses a layer to check the grounded state of the vehicle.
+  setupMessage_2: To make sure the grounded check works correctly a new layer must
+    be added - this stops the raycast hitting the vehicle collider and stops any
+    issues occuring from the ground check.
+  setupMessage_3: Click the button below to add a layer automatically.
+  setupMessage_4: Or consult the documentation for manual setup.
+  setupWarning: '(WARNING: This will add ''Ground'' to layer 9).'
+  setupNote: 'Note: Vehicles will not move correctly until this layer setup is complete.'
