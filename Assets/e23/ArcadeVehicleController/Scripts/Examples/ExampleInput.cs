@@ -34,7 +34,7 @@ namespace e23.VehicleController.Examples
         {
             // Acceleration
             if (joystick.Vertical > 0.5f) { VehicleBehaviour.ControlAcceleration(joystick.Vertical); }
-            if (joystick.Vertical == 0) { VehicleBehaviour.FuckAcceleration(); }
+            if (joystick.Vertical < 0) { VehicleBehaviour.FuckAcceleration(); }
 
             // Steering
             if (joystick.Horizontal < 0) { VehicleBehaviour.ControlTurning(joystick.Horizontal * 1); }

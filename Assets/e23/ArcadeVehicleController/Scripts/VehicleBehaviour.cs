@@ -341,7 +341,9 @@ namespace e23.VehicleController
 
         public void FuckAcceleration()
         {
-            speed = 0;
+            // if (speed > 0)
+            speed -= 12;
+            // speed = 0;
         }
 
         /// <summary>
