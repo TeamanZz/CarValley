@@ -22,7 +22,7 @@ namespace e23.VehicleController.Examples
         private int newDirection;
         private bool brake = false;
 
-        private void Start() 
+        private void Start()
         {
             GetRequiredComponents();
             GetFirstWaypoint();
@@ -43,7 +43,7 @@ namespace e23.VehicleController.Examples
             layerMask = 1 << 0;
         }
 
-        private void Update() 
+        private void Update()
         {
             if (canDrive == true)
             {
@@ -55,7 +55,7 @@ namespace e23.VehicleController.Examples
 
         private void Drive(bool forward)
         {
-            if (forward) { vehicleBehaviour.ControlAcceleration(); }
+            if (forward) { vehicleBehaviour.ControlAcceleration(1); }
             else { vehicleBehaviour.ControlBrake(); }
         }
 
@@ -73,25 +73,26 @@ namespace e23.VehicleController.Examples
         {
             Vector3 targetVector = targetWaypoint - transform.position;
             targetVector.y = transform.localPosition.y;
-            
+
             Vector3 transformForwardPlane = transform.forward;
             transformForwardPlane.y = transform.localPosition.y;
-            
+
             Vector3 cross = Vector3.Cross(transformForwardPlane, targetVector);
-            
+
             newDirection = cross.y >= 0 ? 1 : -1;
 
             SteerVehicle(newDirection);
         }
 
-        private void EvaluateNextWaypoint() {
+        private void EvaluateNextWaypoint()
+        {
             var distanceToWaypoint = DistanceToWaypoint();
-            
-            if (distanceToWaypoint < minimalDistanceToNextWaypoint) 
+
+            if (distanceToWaypoint < minimalDistanceToNextWaypoint)
             {
                 targetWaypointIndex++;
 
-                if (targetWaypointIndex == waypath.PathNodeCount) 
+                if (targetWaypointIndex == waypath.PathNodeCount)
                 {
                     targetWaypointIndex = 0;
                 }
@@ -146,7 +147,7 @@ namespace e23.VehicleController.Examples
             Vector3 posSideEnd;
 
             posSide = GetSideSensorStart(false);
-            posSideEnd = GetSideSensorEnd(frontSensorStartPoint, sideSensorEndOffset, sensorLength/2, false);
+            posSideEnd = GetSideSensorEnd(frontSensorStartPoint, sideSensorEndOffset, sensorLength / 2, false);
             Debug.DrawLine(posSide, posSideEnd, Color.red);
 
             Physics.Raycast(posSide, transform.forward, out hit, sensorLength);
@@ -156,7 +157,7 @@ namespace e23.VehicleController.Examples
             }
 
             posSide = GetSideSensorStart(true);
-            posSideEnd = GetSideSensorEnd(frontSensorStartPoint, sideSensorEndOffset, sensorLength/2, true);
+            posSideEnd = GetSideSensorEnd(frontSensorStartPoint, sideSensorEndOffset, sensorLength / 2, true);
             Debug.DrawLine(posSide, posSideEnd, Color.red);
 
             Physics.Raycast(posSide, transform.forward, out hit, sensorLength);
@@ -180,7 +181,7 @@ namespace e23.VehicleController.Examples
         {
             Vector3 sensor;
             Vector3 direction = GetRightDirection(negative);
-            sensor = transform.position + (direction * endOffset) + (transform.forward * startOffset) * sensorLength/2;
+            sensor = transform.position + (direction * endOffset) + (transform.forward * startOffset) * sensorLength / 2;
             sensor.y = transform.position.y + SensorHeight;
 
             return sensor;

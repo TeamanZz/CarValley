@@ -41,7 +41,7 @@ namespace e23.VehicleController
         private float strafeSpeed, strafeTarget, strafeTilt;
         private float wheelRadius;
         private float rayMaxDistance;
-                
+
         private bool isBoosting;
 
         private Vector3 containerBase;
@@ -49,9 +49,9 @@ namespace e23.VehicleController
         private List<Transform> vehicleWheels;
 
         public VehicleType VehicleWheelCount { get { return vehicleType; } set { vehicleType = value; } }
-        public Transform VehicleModel { get { return vehicleModel; } set { vehicleModel = value; }}
+        public Transform VehicleModel { get { return vehicleModel; } set { vehicleModel = value; } }
         public Rigidbody PhysicsSphere { get { return physicsSphere; } set { physicsSphere = value; } }
-        
+
         public Transform VehicleBody { get { return vehicleBody; } set { vehicleBody = value; } }
         public Transform FrontLeftWheel { get { return frontLeftWheel; } set { frontLeftWheel = value; } }
         public Transform FrontRightWheel { get { return frontRightWheel; } set { frontRightWheel = value; } }
@@ -60,21 +60,21 @@ namespace e23.VehicleController
 
         public VehicleBehaviourSettings VehicleSettings { get { return vehicleSettings; } set { vehicleSettings = value; } }
 
-        public float Acceleration => VehicleSettings.acceleration;                                              
+        public float Acceleration => VehicleSettings.acceleration;
         public float MaxSpeed { get; set; }
-        public float BreakSpeed => VehicleSettings.breakSpeed;                                                  
-        public float BoostSpeed => VehicleSettings.boostSpeed;                                                  
-        public float MaxSpeedToStartReverse => VehicleSettings.maxSpeedToStartReverse;                          
+        public float BreakSpeed => VehicleSettings.breakSpeed;
+        public float BoostSpeed => VehicleSettings.boostSpeed;
+        public float MaxSpeedToStartReverse => VehicleSettings.maxSpeedToStartReverse;
         public float Steering { get; set; }
-        public float MaxStrafingSpeed => VehicleSettings.maxStrafingSpeed;                                      
-        public float Gravity => VehicleSettings.gravity;                                                        
-        public float Drift => VehicleSettings.drift;                                                            
+        public float MaxStrafingSpeed => VehicleSettings.maxStrafingSpeed;
+        public float Gravity => VehicleSettings.gravity;
+        public float Drift => VehicleSettings.drift;
         public float VehicleBodyTilt => VehicleSettings.vehicleBodyTilt;
-        public float ForwardTilt => VehicleSettings.forwardTilt;                                                
-        public bool TurnInAir => VehicleSettings.turnInAir;                                                     
+        public float ForwardTilt => VehicleSettings.forwardTilt;
+        public bool TurnInAir => VehicleSettings.turnInAir;
         public bool TurnWhenStationary => VehicleSettings.turnWhenStationary;
-        public bool TwoWheelTilt => VehicleSettings.twoWheelTilt;                                               
-        public bool StopSlopeSlide => VehicleSettings.stopSlopeSlide;                                           
+        public bool TwoWheelTilt => VehicleSettings.twoWheelTilt;
+        public bool StopSlopeSlide => VehicleSettings.stopSlopeSlide;
         public float RotateTarget { get; private set; }
         public bool NearGround { get; private set; }
         public bool OnGround { get; private set; }
@@ -85,6 +85,11 @@ namespace e23.VehicleController
         public bool IsBoosting => isBoosting;
         public float GetVehicleVelocitySqrMagnitude { get { return PhysicsSphere.velocity.sqrMagnitude; } }
         public Vector3 GetVehicleVelocity { get { return PhysicsSphere.velocity; } }
+
+        public float myAcceleration;
+
+        public Transform p1;
+        public Transform p2;
 
         private void Awake()
         {
@@ -116,7 +121,7 @@ namespace e23.VehicleController
             if (frontLeftWheel != null || frontRightWheel != null || backLeftWheel != null || BackRightWheel != null)
             {
                 vehicleWheels = new List<Transform>();
-            
+
                 if (frontLeftWheel != null) { vehicleWheels.Add(frontLeftWheel); }
                 if (frontRightWheel != null) { vehicleWheels.Add(frontRightWheel); }
                 if (backLeftWheel != null) { vehicleWheels.Add(backLeftWheel); }
@@ -193,12 +198,12 @@ namespace e23.VehicleController
 
             Vector3 localVelocity = transform.InverseTransformVector(PhysicsSphere.velocity);
             localVelocity.x *= 0.9f + (Drift / 10);
-            
+
             if (NearGround)
             {
                 PhysicsSphere.velocity = transform.TransformVector(localVelocity);
             }
-            
+
             transform.position = PhysicsSphere.transform.position + modelHeightOffGround;
 
             if (StopSlopeSlide) { CounterSlopes(hitNear.normal); }
@@ -206,7 +211,7 @@ namespace e23.VehicleController
 
         private void Accelerate()
         {
-            speedTarget = Mathf.SmoothStep(speedTarget, speed, Time.deltaTime * Acceleration);
+            speedTarget = Mathf.SmoothStep(speedTarget, speed, Time.deltaTime * myAcceleration);
             speed = 0f;
         }
 
@@ -306,7 +311,7 @@ namespace e23.VehicleController
         {
             MaxSpeed = speedPenalty;
         }
-        
+
         /// <summary>
         /// Change the Steering speed of the vehicle. Use DefaultSteering to return to the original Steering
         /// </summary>
@@ -321,16 +326,22 @@ namespace e23.VehicleController
         /// <summary>
         /// Move the vehicle foward
         /// </summary>
-        public void ControlAcceleration()
+        public void ControlAcceleration(float acceleration)
         {
-            if (!isBoosting) 
-            { 
-                speed = MaxSpeed; 
+            if (!isBoosting)
+            {
+                myAcceleration = acceleration * Acceleration;
+                speed = MaxSpeed;
             }
-            else 
-            { 
-                speed = BoostSpeed; 
+            else
+            {
+                speed = BoostSpeed;
             }
+        }
+
+        public void FuckAcceleration()
+        {
+            speed = 0;
         }
 
         /// <summary>
@@ -344,6 +355,7 @@ namespace e23.VehicleController
             }
             else
             {
+                Debug.Log(speed);
                 speed = -MaxSpeed;
             }
         }
@@ -352,7 +364,7 @@ namespace e23.VehicleController
         /// Turn left (int -1) or right (int 1). 
         /// </summary>
         /// <param name="direction"></param>
-        public void ControlTurning(int direction)
+        public void ControlTurning(float direction)
         {
             if (TurnWhenStationary == false && GetVehicleVelocitySqrMagnitude < 0.1f) { return; }
 
@@ -371,7 +383,7 @@ namespace e23.VehicleController
             strafeSpeed = MaxStrafingSpeed * (direction * 2);
             strafeTilt = Steering * direction;
         }
-        
+
         /// <summary>
         /// Sets isBoosting to true. Set your boost speed in the VehicleSettings asset
         /// </summary>

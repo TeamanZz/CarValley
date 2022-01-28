@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11b0d68efdcb67b49b5e649862afff07, type: 3}
   m_Name: My Venicle
   m_EditorClassIdentifier: 
-  acceleration: 9
+  acceleration: 4
   maxSpeed: 12
   breakSpeed: 1.7
   boostSpeed: 60
   maxSpeedToStartReverse: 150
-  steering: 80
+  steering: 43.4
   maxStrafingSpeed: 15
   gravity: 0
   drift: 0.85
-  vehicleBodyTilt: 0.2
+  vehicleBodyTilt: 1.31
   forwardTilt: 7.54
   angularDrag: 0.95
   turnInAir: 1
