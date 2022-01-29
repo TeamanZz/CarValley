@@ -30,7 +30,6 @@ public class Crate : MonoBehaviour
     {
         if (Mathf.Abs(carRigidbody.velocity.x) + Mathf.Abs(carRigidbody.velocity.z) >= 6.8f)
         {
-            Debug.Log(Mathf.Abs(carRigidbody.velocity.x) + Mathf.Abs(carRigidbody.velocity.z));
             crateRigidbody.constraints = RigidbodyConstraints.None;
         }
         else
