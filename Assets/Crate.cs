@@ -14,7 +14,7 @@ public class Crate : MonoBehaviour
 
     private void Update()
     {
-        SetCrateBehaivor();
+        // SetCrateBehaivor();
     }
 
     private void OnCollisionEnter(Collision other)

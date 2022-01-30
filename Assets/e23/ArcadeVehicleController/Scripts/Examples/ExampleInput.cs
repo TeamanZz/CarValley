@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace e23.VehicleController.Examples
 {
@@ -30,11 +30,12 @@ namespace e23.VehicleController.Examples
             set { vehicleBehaviour = value; }
         }
 
+
         private void Update()
         {
             // Acceleration
             if (joystick.Vertical > 0.5f) { VehicleBehaviour.ControlAcceleration(joystick.Vertical); }
-            if (joystick.Vertical < 0) { VehicleBehaviour.FuckAcceleration(); }
+            if (joystick.Vertical == 0) { VehicleBehaviour.FuckAcceleration(); }
 
             // Steering
             if (joystick.Horizontal < 0) { VehicleBehaviour.ControlTurning(joystick.Horizontal * 1); }
@@ -48,6 +49,8 @@ namespace e23.VehicleController.Examples
             if (Input.GetKeyDown(boost)) { VehicleBehaviour.Boost(); }
             if (Input.GetKeyUp(boost)) { VehicleBehaviour.StopBoost(); }
             if (Input.GetKey(oneShotBoost)) { VehicleBehaviour.OneShotBoost(boostLength); }
+
+
         }
     }
 }

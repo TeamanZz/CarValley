@@ -4,13 +4,26 @@ using UnityEngine;
 
 public class CarJoystickController : MonoBehaviour
 {
+    public static CarJoystickController Instance;
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    public void StopCar()
+    {
+        carRB.velocity = Vector3.zero;
+        carRB.angularVelocity = Vector3.zero;
+        carRB.constraints = RigidbodyConstraints.FreezePosition;
+        Debug.Log("Stopped");
+    }
+
+    public void MoveCar()
+    {
+        carRB.constraints = RigidbodyConstraints.None;
+    }
+
     public float speed;
     public FloatingJoystick joystick;
-    public Rigidbody rb;
-
-    public void FixedUpdate()
-    {
-        // Vector3 direction = Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal;
-        // rb.AddForce(direction * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
-    }
+    public Rigidbody carRB;
 }

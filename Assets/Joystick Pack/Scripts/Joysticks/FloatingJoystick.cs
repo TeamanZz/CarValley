@@ -16,11 +16,16 @@ public class FloatingJoystick : Joystick
         background.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position);
         background.gameObject.SetActive(true);
         base.OnPointerDown(eventData);
+        CarJoystickController.Instance.MoveCar();
+
     }
 
     public override void OnPointerUp(PointerEventData eventData)
     {
         background.gameObject.SetActive(false);
         base.OnPointerUp(eventData);
+
+        CarJoystickController.Instance.StopCar();
+
     }
 }
