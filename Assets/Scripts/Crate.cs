@@ -19,11 +19,11 @@ public class Crate : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.layer == 6)
-        {
-            transform.parent = null;
-            transform.localScale = new Vector3(1.3f, 0.15f, 1);
-        }
+        // if (other.gameObject.layer == 6)
+        // {
+        //     transform.parent = null;
+        //     transform.localScale = new Vector3(1.3f, 0.15f, 1);
+        // }
     }
 
     private void SetCrateBehaivor()
