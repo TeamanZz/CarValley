@@ -14,8 +14,15 @@ public class CarJoystickController : MonoBehaviour
     {
         carRB.velocity = Vector3.zero;
         carRB.angularVelocity = Vector3.zero;
-        carRB.constraints = RigidbodyConstraints.FreezePosition;
-        Debug.Log("Stopped");
+        if (!CarFallDetector.Instance.canFall)
+        {
+            carRB.constraints = RigidbodyConstraints.FreezePosition;
+        }
+        else
+        {
+            carRB.constraints = RigidbodyConstraints.FreezePositionX;
+            carRB.constraints = RigidbodyConstraints.FreezePositionZ;
+        }
     }
 
     public void MoveCar()
