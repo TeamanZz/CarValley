@@ -16,7 +16,7 @@ public class FloatingJoystick : Joystick
         background.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position);
         background.gameObject.SetActive(true);
         base.OnPointerDown(eventData);
-        CarJoystickController.Instance.MoveCar();
+        // CarJoystickController.Instance.MoveCar();
 
     }
 
@@ -25,7 +25,7 @@ public class FloatingJoystick : Joystick
         background.gameObject.SetActive(false);
         base.OnPointerUp(eventData);
 
-        CarJoystickController.Instance.StopCar();
+        // CarJoystickController.Instance.StopCar();
 
     }
 }
